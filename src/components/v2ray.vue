@@ -13,12 +13,12 @@
                 <p>请拿手机加速软件扫描此二维码</p>
             </div>
             <br>
-            <a href="https://apkpure.com/cn/v2rayng/com.v2ray.ang">下载安卓版本（v2rayNG）</a>
+            <a href="https://d-01.winudf.com/b/apk/Y29tLnYycmF5LmFuZ180MDAwMDgwX2M2ODhjY2Ew?_fn=djJyYXlOR192MC4zLjEwX2Fwa3B1cmUuY29tLmFwaw&_p=Y29tLnYycmF5LmFuZw&as=41bf689456a558e5e1acb11e3ded36e25a8d65a3&c=1%7CCOMMUNICATION&k=00cb96efa4eca7fc5a0845505b3235215a9119f6">下载安卓版本（v2rayNG）</a>
             <br>
             <br>
             <a href="https://itunes.apple.com/hk/app/shadowrocket/id932747118?mt=8">下载iOS版本（ShadowRocket）</a>
           <div class="qr">
-              <qrcode-vue :value="msg" :size="500" level="H"></qrcode-vue>
+              <qrcode-vue :value="msg" :size="400" level="H"></qrcode-vue>
              
           </div>     
            <el-switch 
@@ -79,7 +79,7 @@ export default {
 .head{
     margin: 8%;
     padding: 7%;
-    font-size: 650%;
+    font-size: 500%;
     text-align: center;
     border-radius: 60px;
     color: #F41F25;
@@ -100,11 +100,12 @@ p{
     
 }
 .miao{
-    font-size: 190%;
+    text-align: center;
+    font-size: 150%;
     color: darkcyan
 }
 a{
-    font-size: 20px;
+    font-size: 16px;
     color: #13ce66;
     text-decoration: none;
 }
