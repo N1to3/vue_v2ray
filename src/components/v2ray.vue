@@ -13,14 +13,23 @@
                 <p>请拿手机加速软件扫描此二维码</p>
             </div>
             <br>
-            <a href="https://d-01.winudf.com/b/apk/Y29tLnYycmF5LmFuZ180MDAwMDgwX2M2ODhjY2Ew?_fn=djJyYXlOR192MC4zLjEwX2Fwa3B1cmUuY29tLmFwaw&_p=Y29tLnYycmF5LmFuZw&as=41bf689456a558e5e1acb11e3ded36e25a8d65a3&c=1%7CCOMMUNICATION&k=00cb96efa4eca7fc5a0845505b3235215a9119f6">下载安卓版本（v2rayNG）</a>
+            <a href="https://share.weiyun.com/961cca86de1f21c10352b0078e3f6065">下载安卓版本（v2rayNG）</a>
             <br>
             <br>
             <a href="https://itunes.apple.com/hk/app/shadowrocket/id932747118?mt=8">下载iOS版本（ShadowRocket）</a>
+            <br>
+            <br>
+          <div class="location">
+                <p style="display:inline">节点选择:</p>
+                <el-radio-group v-model="radio" @change="location">
+                <el-radio-button label="阿里-新加坡"></el-radio-button>
+                <el-radio-button label="阿里-美国"></el-radio-button>
+                </el-radio-group>
+          </div> 
           <div class="qr">
               <qrcode-vue :value="msg" :size="400" level="H"></qrcode-vue>
-             
-          </div>     
+          </div>
+               
            <el-switch 
                 @change="change"           
                 style="display: block"
@@ -46,6 +55,7 @@ export default {
   data() {
       return{
           msg: '',
+          radio: '阿里-新加坡',
           value: 'RocketQR',
           url: 'http://47.88.229.101:8889/v2ray/'
       }
@@ -66,6 +76,18 @@ export default {
         }).catch(function (error){
           console.log(error);
         })
+      },
+      location: function(){
+          console.log(this.radio)
+          if(this.radio == '阿里-美国'){
+              this.url = 'http://47.89.240.222:8889/v2ray/'
+              this.change()             
+          } else if(this.radio == '阿里-新加坡'){
+              this.url = 'http://47.88.229.101:8889/v2ray/'
+              this.change()
+          } else{
+              console.log('location???')
+          }
       }
   },
    components: {
@@ -108,6 +130,12 @@ a{
     font-size: 16px;
     color: #13ce66;
     text-decoration: none;
+}
+
+.location{
+    color: black;
+    font-size: 26px;
+    display: inline;
 }
 .bg{
     text-align: center
