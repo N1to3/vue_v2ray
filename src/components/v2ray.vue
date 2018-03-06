@@ -1,16 +1,21 @@
 <template>
 <el-row>
-  <el-col :xs="0" :sm="2" :md="6" :lg="6" :xl="8">
+  <el-col :xs="0" :sm="0.5" :md="6" :lg="6" :xl="8">
       <br>
       <div>
       </div></el-col>
-  <el-col :xs="24" :sm="22" :md="12" :lg="12" :xl="8">
+  <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
       <div class="bg">
           <div class="head">
               <p>V2RAY</p>
           </div> 
+          <el-button icon="el-icon-success" type="danger" @click="money">微信扫码捐助</el-button>
+          <br>
+          <br>
             <div class="miao"> 
-                <p>请拿手机加速软件扫描此二维码</p>
+                <p>先选择系统再拿手机加速软件扫描此二维码
+                </p>
+                <p>（扫码不成功可以点复制按钮然后 ：））</p>
             </div>
             <br>
             <a href="https://share.weiyun.com/961cca86de1f21c10352b0078e3f6065">下载安卓版本（v2rayNG）</a>
@@ -21,15 +26,19 @@
             <br>
           <div class="location">
                 <p style="display:inline">节点选择:</p>
-                <el-radio-group v-model="radio" @change="location">
-                <el-radio-button label="阿里-新加坡"></el-radio-button>
+                <el-radio-group v-model="radio" size="small" @change="location">
+                <el-radio-button label="阿里-新加坡"></el-radio-button>      
                 <el-radio-button label="阿里-美国"></el-radio-button>
+                <el-radio-button label="vultr-jp"></el-radio-button>
+                <el-radio-button label="vultr-sg"></el-radio-button>
+                <el-radio-button label="linode-us"></el-radio-button>
+                <el-radio-button label="Netflix"></el-radio-button>
                 </el-radio-group>
           </div> 
           <div class="qr">
               <qrcode-vue :value="msg" :size="400" level="H"></qrcode-vue>
           </div>
-               
+
            <el-switch 
                 @change="change"           
                 style="display: block"
@@ -41,8 +50,20 @@
                 active-text="iOS"
                 inactive-text="Android">
               </el-switch>
+              <br>
+              <div class="container">
+                <el-button type="success"
+                icon="el-icon-tickets"
+                v-clipboard:copy="msg"
+                v-clipboard:success="onCopy"
+                v-clipboard:error="onError">点此复制</el-button>
+            </div>
+            <br>
+            <div class="el-button">
+                <a v-bind:href="msg">iOS闪电导入</a>
+            </div>
       </div></el-col>
-  <el-col :xs="0" :sm="2" :md="6" :lg="6" :xl="8"><div></div>
+  <el-col :xs="0" :sm="0" :md="6" :lg="6" :xl="8"><div></div>
   </el-col>
 </el-row>
 </template>
@@ -56,6 +77,7 @@ export default {
       return{
           msg: '',
           radio: '阿里-新加坡',
+          message: 'Copy These Text',
           value: 'RocketQR',
           url: 'http://47.88.229.101:8889/v2ray/'
       }
@@ -69,6 +91,9 @@ export default {
         })
   },
   methods:{
+      money: function(){
+          this.msg = 'wxp://f2f0_hJWKfBHXLnL-fMfRTnoxE7t1iK33sPf'
+      },
       change: function(){
          this.$http.get(this.url + this.value).then((response) =>{
           this.msg = response.data
@@ -77,6 +102,16 @@ export default {
           console.log(error);
         })
       },
+       onCopy: function (e) {
+    //   alert('You just copied: ' + e.text)
+        this.$message({
+            message:'复制成功：） 请打开软件选择从剪贴板导入',
+            type: 'success'
+        });
+    },
+    onError: function (e) {
+        this.$message.error('错了哦，这是一条错误消息');
+    },
       location: function(){
           console.log(this.radio)
           if(this.radio == '阿里-美国'){
@@ -85,7 +120,21 @@ export default {
           } else if(this.radio == '阿里-新加坡'){
               this.url = 'http://47.88.229.101:8889/v2ray/'
               this.change()
-          } else{
+          } else if(this.radio == 'vultr-jp'){
+              this.url = 'http://45.76.102.240:8889/v2ray/'
+              this.change()
+          }else if(this.radio == 'vultr-sg'){
+              this.url = 'http://45.32.108.252:8889/v2ray/'
+              this.change()
+          }else if(this.radio == 'linode-us'){
+              this.url = 'http://198.74.56.109:8889/v2ray/'
+              this.change()
+          }
+          else if(this.radio == 'Netflix'){
+              this.url = 'http://162.212.157.181:8889/v2ray/'
+              this.change()
+          }
+          else{
               console.log('location???')
           }
       }
@@ -115,7 +164,7 @@ p{
     margin: 0%;
 }
 .qr{
-    padding: 5%;
+    padding: 4%;
     display: flex;
      justify-content: center;
     align-items: center;
@@ -134,13 +183,14 @@ a{
 
 .location{
     color: black;
-    font-size: 26px;
+    font-size: 20px;
     display: inline;
 }
 .bg{
     text-align: center
 
 }
+
 
 
 </style>

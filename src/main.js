@@ -8,7 +8,9 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import QrcodeVue from 'qrcode.vue';
-
+import VueClipboard from 'vue-clipboard2'
+ 
+Vue.use(VueClipboard)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
